@@ -6,7 +6,7 @@ Dark terminal aesthetic, live Binance WebSocket, Fear & Greed index, and on-chai
 This is a **portfolio / demonstration project** — a showcase of building a professional,
 real-time crypto trading interface. It runs fully on **public APIs, with no API keys required**.
 
-> **Live demo:** _(link added after deploy)_
+> **Live demo:** [crypto-dashboard-template.vercel.app](https://crypto-dashboard-template.vercel.app)
 
 ---
 
