@@ -1,15 +1,15 @@
 import { NextResponse } from 'next/server';
 
 export const revalidate = 0;
-// Binance REST geo-blocks some datacenter regions; pin to EU (Frankfurt).
 export const preferredRegion = 'fra1';
 
 export async function GET() {
   try {
-    const [ticker, klines] = await Promise.all([
-      fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT', { cache: 'no-store' }),
-      fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1h&limit=2', { cache: 'no-store' }),
-    ]);
+    // Public Binance market-data cluster — not IP/geo-restricted like api.binance.com.
+    const ticker = await fetch(
+      'https://data-api.binance.vision/api/v3/ticker/24hr?symbol=BTCUSDT',
+      { cache: 'no-store' },
+    );
 
     if (!ticker.ok) throw new Error('Binance ticker error');
     const t = await ticker.json();
