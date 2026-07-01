@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export const revalidate = 0;
+export const preferredRegion = 'fra1';
 
 export async function GET() {
   try {
@@ -17,9 +18,10 @@ export async function GET() {
     const fees = feesRes.status === 'fulfilled' && feesRes.value.ok
       ? await feesRes.value.json() : null;
 
-    const hashEH = hashRaw ? (hashRaw / 1e18).toFixed(1) + ' EH/s' : '—';
+    // blockchain.info/q/hashrate returns GH/s → EH/s = value / 1e9
+    const hashEH = hashRaw ? (hashRaw / 1e9).toFixed(0) + ' EH/s' : '—';
     const hashSignal = hashRaw
-      ? (hashRaw > 6e20 ? 'HIGH' : hashRaw > 4e20 ? 'NORMAL' : 'LOW') : 'UNKNOWN';
+      ? (hashRaw > 6e11 ? 'HIGH' : hashRaw > 4e11 ? 'NORMAL' : 'LOW') : 'UNKNOWN';
 
     const mempoolTx = mempool?.count ?? 0;
     const mempoolSignal = mempoolTx > 50000 ? 'HIGH_DEMAND' : mempoolTx > 20000 ? 'NORMAL' : 'LOW_DEMAND';

@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 
 export const revalidate = 0;
+// Binance REST geo-blocks some datacenter regions; pin to EU (Frankfurt).
+export const preferredRegion = 'fra1';
 
 export async function GET() {
   try {
