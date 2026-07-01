@@ -16,8 +16,7 @@ export default function QuantCard({ longScore, shortScore, regime, locked = fals
     <div className="quant-card" style={{ position: 'relative' }}>
       {locked && (
         <div className="pro-lock-overlay">
-          <span className="pro-lock-badge">PRO</span>
-          <span className="pro-lock-text">AI Quant Scoring</span>
+          <span className="pro-lock-text">Quant Scoring</span>
         </div>
       )}
       <div className="quant-header">

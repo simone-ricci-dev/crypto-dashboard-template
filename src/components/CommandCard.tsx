@@ -36,9 +36,7 @@ export default function CommandCard({ command, locked = false }: Props) {
     <div className={`command-card ${stateClass}`} style={{ position: 'relative' }}>
       {locked && (
         <div className="pro-lock-overlay">
-          <span className="pro-lock-badge">PRO</span>
-          <span className="pro-lock-text">AI Trading Command</span>
-          <a href="#pro" className="pro-lock-cta">Unlock — €59</a>
+          <span className="pro-lock-text">Advanced signal</span>
         </div>
       )}
 

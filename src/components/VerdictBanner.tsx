@@ -19,8 +19,7 @@ export default function VerdictBanner({ command, locked = false }: Props) {
     <div className={`verdict ${verdictClass}`} style={{ position: 'relative' }}>
       {locked && (
         <div className="pro-lock-overlay" style={{ borderRadius: '14px' }}>
-          <span className="pro-lock-badge">PRO</span>
-          <span className="pro-lock-text">AI Verdict</span>
+          <span className="pro-lock-text">Verdict</span>
         </div>
       )}
       <div className="verdict-row">

@@ -41,14 +41,13 @@ export default function DashboardPage() {
           <span className="dash-logo-text">BTC Dashboard</span>
         </div>
         <div className="dash-header-right">
-          <span className="badge-free">FREE TIER</span>
-          <a href="#pro" className="btn-pro-small">Upgrade PRO — €59</a>
+          <span className="badge-free">LIVE DEMO</span>
         </div>
       </header>
 
       <main className="dash-main">
-        {/* Verdict Banner — PRO locked */}
-        <VerdictBanner command={DEMO_COMMAND} locked />
+        {/* Verdict Banner — sample data */}
+        <VerdictBanner command={DEMO_COMMAND} />
 
         {/* Price Bar — live WebSocket, always free */}
         <PriceBar price={price} ws={ws} onRefresh={refetch} />
@@ -62,42 +61,19 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* PRO section */}
+        {/* Advanced signal panel — illustrative sample data */}
         <div className="pro-section-divider">
-          <span>PRO features — preview below</span>
+          <span>Advanced signal panel · sample data</span>
         </div>
+        <p className="demo-note">
+          The panel below is populated with illustrative sample data to demonstrate the interface
+          and component design. The live analysis engine is not part of this public demo.
+        </p>
 
         <div className="dash-row-2col">
-          <QuantCard longScore={62} shortScore={38} regime="TRENDING" locked />
-          <CommandCard command={DEMO_COMMAND} locked />
+          <QuantCard longScore={62} shortScore={38} regime="TRENDING" />
+          <CommandCard command={DEMO_COMMAND} />
         </div>
-
-        {/* PRO CTA */}
-        <section className="pro-cta-section" id="pro">
-          <div className="pro-cta-card">
-            <div className="pro-cta-badge">PRO</div>
-            <h2 className="pro-cta-title">Unlock the full dashboard</h2>
-            <p className="pro-cta-sub">
-              One-time payment. Lifetime access. MIT license — deploy it as your own product.
-            </p>
-            <ul className="pro-cta-list">
-              <li>AI Trading Command — LONG / SHORT / WAIT with entry, SL, and 3 TP levels</li>
-              <li>Quant Scoring — multi-factor signal composite (trend, funding, macro, on-chain)</li>
-              <li>Verdict Banner — instant read on whether to enter or wait</li>
-              <li>Plug-in your own AI provider (Anthropic, OpenAI, Groq)</li>
-              <li>Full source code, TypeScript, App Router, Tailwind</li>
-            </ul>
-            <a
-              href="https://simonericci.gumroad.com/l/crypto-dashboard-pro"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-buy"
-            >
-              Buy PRO — €59
-            </a>
-            <p className="pro-cta-note">Instant download. No subscription.</p>
-          </div>
-        </section>
 
         <footer className="dash-footer">
           <span>Built with Next.js · Data: Binance, Alternative.me, mempool.space · Not financial advice</span>

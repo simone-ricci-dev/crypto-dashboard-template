@@ -283,3 +283,8 @@ body {
   text-align: center; font-size: 10px; color: var(--muted2);
   padding: 16px 0 8px; border-top: 1px solid var(--border); margin-top: 20px;
 }
+
+.demo-note {
+  font-size: 11px; color: var(--muted2); line-height: 1.5;
+  margin: 2px 0 14px; max-width: 640px;
+}

@@ -1,10 +1,22 @@
-# Crypto Trading Dashboard — Next.js Template
+# Crypto Trading Dashboard — Live Demo
 
-Real-time BTC/USDT trading dashboard built with Next.js 15, TypeScript, and Tailwind CSS.
-Dark terminal aesthetic, live Binance WebSocket, Fear & Greed index, on-chain data.
+A real-time BTC/USDT trading dashboard built with **Next.js, TypeScript and Tailwind CSS**.
+Dark terminal aesthetic, live Binance WebSocket, Fear & Greed index, and on-chain signals.
 
-**Free tier** ships fully working out of the box — no API keys needed.
-**PRO tier** adds AI Trading Commands (LONG/SHORT/WAIT with entry, SL, 3 TP levels), Quant Scoring, and the Verdict Banner.
+This is a **portfolio / demonstration project** — a showcase of building a professional,
+real-time crypto trading interface. It runs fully on **public APIs, with no API keys required**.
+
+> **Live demo:** _(link added after deploy)_
+
+---
+
+## What it demonstrates
+
+- **Real-time data over WebSocket** — live BTC mark price streamed from Binance Futures, with auto-reconnect.
+- **Clean async data layer** — REST polling for 24h stats, sentiment and on-chain metrics via typed API routes.
+- **Professional trading UI** — price bar with live indicator, sentiment gauge, on-chain panel, signal cards, verdict banner.
+- **Fully typed** — shared TypeScript types across hooks, components and API routes.
+- **Zero-config** — no keys, no database; everything is driven by public endpoints.
 
 ---
 
@@ -16,59 +28,30 @@ npm run dev
 # → http://localhost:3000
 ```
 
-No `.env` needed for the free tier. All free data sources are public APIs.
+No `.env` required. All data sources are public APIs.
 
 ---
 
-## Free tier — what works with zero config
+## Data sources (all public, no key)
 
-| Feature | Source | Notes |
+| Feature | Source | Endpoint |
 |---|---|---|
 | Live BTC price (WebSocket) | Binance Futures | `wss://fstream.binance.com/ws/btcusdt@markPrice@1s` |
 | 24h change, High/Low, Volume | Binance REST | `/api/v3/ticker/24hr` |
-| Fear & Greed Index | Alternative.me | Public, no key |
-| Mempool congestion | mempool.space | Public, no key |
-| Hashrate | blockchain.info | Public, no key |
-| Network fees | mempool.space | Public, no key |
+| Fear & Greed Index | Alternative.me | `api.alternative.me/fng` |
+| Mempool congestion | mempool.space | `/api/mempool` |
+| Network fees | mempool.space | `/api/v1/fees/recommended` |
+| Hashrate | blockchain.info | `/q/hashrate` |
 
 ---
 
-## PRO tier — unlock AI commands
+## A note on the "Advanced signal panel"
 
-The PRO section (blurred in the free demo) requires an AI provider.
+The dashboard includes an **advanced signal panel** (Quant Scoring, trading command, verdict banner)
+rendered with **illustrative sample data**, purely to demonstrate the interface and component design.
 
-### 1. Create `.env.local`
-
-```bash
-cp .env.example .env.local
-```
-
-### 2. Add your AI key
-
-```env
-# Pick one
-ANTHROPIC_API_KEY=sk-ant-...
-# or
-OPENAI_API_KEY=sk-...
-```
-
-### 3. Create the `/api/command` route
-
-The template ships with the UI and types for `TradingCommand` — wire up your own analysis logic in `src/app/api/command/route.ts`. A minimal implementation:
-
-```typescript
-import Anthropic from '@anthropic-ai/sdk';
-import { NextResponse } from 'next/server';
-
-export async function POST(req: Request) {
-  const { price, fgi, hashRate } = await req.json();
-  const client = new Anthropic();
-  // ... call Claude, parse JSON, return TradingCommand
-  return NextResponse.json(command);
-}
-```
-
-The `TradingCommand` type is in `src/types/market.ts`.
+**No live trading logic or strategy is included in this repository** — the advanced panel is a UI
+demonstration only. Nothing here is financial advice.
 
 ---
 
@@ -81,42 +64,32 @@ src/
 │   │   ├── price/route.ts       # Binance 24hr ticker
 │   │   ├── sentiment/route.ts   # Fear & Greed index
 │   │   └── onchain/route.ts     # Hashrate + mempool + fees
-│   ├── globals.css              # Full dark design system
+│   ├── globals.css              # Dark design system
 │   ├── layout.tsx
 │   └── page.tsx                 # Dashboard assembly
 ├── components/
 │   ├── PriceBar.tsx             # Live price + WS indicator
 │   ├── SentimentCard.tsx        # Fear & Greed mini card
 │   ├── OnChainPanel.tsx         # Hashrate / mempool / fees
-│   ├── QuantCard.tsx            # Long/Short scoring bar [PRO]
-│   ├── CommandCard.tsx          # Full AI command card [PRO]
-│   └── VerdictBanner.tsx        # Enter/Wait verdict [PRO]
+│   ├── QuantCard.tsx            # Long/Short scoring bar
+│   ├── CommandCard.tsx          # Signal command card
+│   └── VerdictBanner.tsx        # Enter/Wait verdict
 ├── hooks/
 │   └── useMarketData.ts         # WebSocket + polling hook
 ├── lib/
 │   └── formatters.ts            # fmtUsd, fmtPct, fmtTime
 └── types/
-    └── market.ts                # All shared TypeScript types
+    └── market.ts                # Shared TypeScript types
 ```
 
 ---
 
-## Deploy on Vercel
+## Tech stack
 
-```bash
-npx vercel
-```
-
-Add environment variables in Vercel dashboard → Settings → Environment Variables.
+Next.js (App Router) · React · TypeScript · Tailwind CSS · native WebSocket · deployed on Vercel.
 
 ---
 
 ## License
 
-MIT — use it, sell it, modify it. No attribution required.
-
----
-
-## PRO version
-
-Full PRO source with AI command integration: [gumroad.com/l/crypto-dashboard-pro](https://simonericci.gumroad.com/l/crypto-dashboard-pro) — €59 one-time.
+MIT.

@@ -1,19 +1,23 @@
 import type { Metadata } from 'next';
 import './globals.css';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ?? (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'http://localhost:3000');
+
 export const metadata: Metadata = {
-  title: 'Crypto Trading Dashboard',
-  description: 'Real-time BTC/USDT trading dashboard — Next.js template with WebSocket, Fear & Greed, on-chain data.',
+  metadataBase: new URL(siteUrl),
+  title: 'Crypto Trading Dashboard — Live Demo',
+  description: 'Real-time BTC/USDT trading dashboard built with Next.js, TypeScript and Tailwind — live Binance WebSocket, Fear & Greed index, on-chain signals.',
   openGraph: {
-    title: 'Crypto Trading Dashboard — Next.js Template',
-    description: 'Live BTC/USDT WebSocket, Fear & Greed, on-chain signals. PRO: AI LONG/SHORT/WAIT commands with entry, SL, TP.',
+    title: 'Crypto Trading Dashboard — Next.js Demo',
+    description: 'Real-time BTC/USDT dashboard: live Binance WebSocket, Fear & Greed, on-chain signals, professional trading UI.',
     images: ['/og-preview.svg'],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Crypto Trading Dashboard — Next.js Template',
-    description: 'Live BTC/USDT WebSocket + AI trading commands. Free tier + PRO €59.',
+    title: 'Crypto Trading Dashboard — Next.js Demo',
+    description: 'Real-time BTC/USDT dashboard with live Binance WebSocket and a professional trading UI.',
     images: ['/og-preview.svg'],
   },
 };
