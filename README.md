@@ -36,7 +36,7 @@ No `.env` required. All data sources are public APIs.
 
 | Feature | Source | Endpoint |
 |---|---|---|
-| Live BTC price (WebSocket) | Binance Futures | `wss://fstream.binance.com/ws/btcusdt@markPrice@1s` |
+| Live BTC price (WebSocket) | Binance (public data) | `wss://data-stream.binance.vision/ws/btcusdt@miniTicker` |
 | 24h change, High/Low, Volume | Binance REST | `/api/v3/ticker/24hr` |
 | Fear & Greed Index | Alternative.me | `api.alternative.me/fng` |
 | Mempool congestion | mempool.space | `/api/mempool` |

@@ -33,8 +33,10 @@ export function useMarketData() {
   const connectWs = useCallback(() => {
     if (wsRef.current?.readyState === WebSocket.OPEN) return;
 
-    const streams = 'btcusdt@markPrice@1s';
-    const socket = new WebSocket(`wss://fstream.binance.com/ws/${streams}`);
+    // Public Binance market-data cluster — reachable from any region,
+    // unlike fstream.binance.com (futures) which is geo-blocked (e.g. US).
+    const streams = 'btcusdt@miniTicker';
+    const socket = new WebSocket(`wss://data-stream.binance.vision/ws/${streams}`);
     wsRef.current = socket;
 
     socket.onopen = () => setWs(p => ({ ...p, connected: true }));
@@ -48,8 +50,8 @@ export function useMarketData() {
         const d = JSON.parse(e.data);
         setWs({
           connected: true,
-          markPrice: d.p ? parseFloat(d.p) : null,
-          fundingRate: d.r ? parseFloat(d.r) : null,
+          markPrice: d.c ? parseFloat(d.c) : null,
+          fundingRate: null,
         });
       } catch {}
     };
